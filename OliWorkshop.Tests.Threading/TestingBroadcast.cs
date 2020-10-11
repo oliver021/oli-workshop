@@ -37,5 +37,43 @@ namespace OliWorkshop.Tests.Threading
             // wait for 110 miliseconds
             return Task.Delay(110);
         }
+
+        [Test]
+        public Task TestCancellation()
+        {
+            // basic index iteration
+            int i = 1;
+
+            // initalize with max concurrent the 8 messages
+            var broadcasting = new BroadcastConcurrent(1, 1000);
+
+            broadcasting.Subscribe(TestChannel, async m => {
+                
+                // emulate a job
+                await Task.Delay(i*250);
+
+                // print a message to inform the task is successful
+                Console.WriteLine("print the message: {0}",m.GetString());
+                
+                // increment time awating
+                i++;
+            });
+
+            // post 8 messages
+            broadcasting.PostString(TestChannel, "hello in real time 1");
+            broadcasting.PostString(TestChannel, "hello in real time 2");
+            broadcasting.PostString(TestChannel, "hello in real time 3");
+            broadcasting.PostString(TestChannel, "hello in real time 4");
+            broadcasting.PostString(TestChannel, "not should be show");
+
+            Task.Delay(1000).ContinueWith(prev => {
+
+                // close the broadcasting
+                broadcasting.Close(); 
+            });
+
+            // wait for 110 miliseconds
+            return broadcasting.Process;
+        }
     }
 }

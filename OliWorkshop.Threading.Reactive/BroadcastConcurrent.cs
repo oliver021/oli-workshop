@@ -103,11 +103,19 @@ namespace OliWorkshop.Threading.Reactive
         /// <summary>
         /// Request the cancellation
         /// </summary>
+        public void Close()
+        {
+            Messsger.Complete();
+        }
+
+        /// <summary>
+        /// Request the cancellation
+        /// </summary>
         public void Cancel()
         {
             TokenSource.Cancel();
         }
-    
+
         /// <summary>
         /// Basic method to control the concurrent flow of broadcasting
         /// </summary>

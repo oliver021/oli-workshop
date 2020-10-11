@@ -1,7 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Version>1.0.12</Version>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/oliver021/oli-workshop</RepositoryUrl>
+    <Authors>Oliver Valiente</Authors>
+    <PackageId>OliWorkshop.Threading.Reactive</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Keyword>concurrency,thread,async,queue,action,parallel</Keyword>
   </PropertyGroup>
 
 </Project>
