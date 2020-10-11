@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OliWorkshop.Threading.Reactive\OliWorkshop.Threading.Reactive.csproj" />
     <ProjectReference Include="..\OliWorkshop.Threading\OliWorkshop.Threading.csproj" />
   </ItemGroup>
 

@@ -36,7 +36,7 @@ namespace OliWorkshop.Threading
         /// <summary>
         /// Event Listeners record to create execution in background
         /// </summary>
-        Dictionary<string, List<EventListener>> Listeners { get; set; }
+        Dictionary<string, List<EventListener>> Listeners { get; } = new Dictionary<string, List<EventListener>>();
 
         /// <summary>
         /// Add a new EventListener for event name
