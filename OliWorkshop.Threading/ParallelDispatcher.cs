@@ -33,10 +33,13 @@ namespace OliWorkshop.Threading
 
         ThreadManager Manager { get; }
 
+        /// <summary>
+        /// Event Listeners record to create execution in background
+        /// </summary>
         Dictionary<string, List<EventListener>> Listeners { get; set; }
 
         /// <summary>
-        /// Add a new EventListener 
+        /// Add a new EventListener for event name
         /// </summary>
         /// <param name="identifierEvent"></param>
         /// <param name="action"></param>
@@ -58,7 +61,7 @@ namespace OliWorkshop.Threading
         }
 
         /// <summary>
-        /// Add a new EventListener 
+        /// Add a new EventListener for event type
         /// </summary>
         /// <param name="identifierEvent"></param>
         /// <param name="action"></param>
@@ -82,6 +85,25 @@ namespace OliWorkshop.Threading
             {
                 Listeners.Add(identifierEvent, new List<EventListener> { action });
             }
+        }
+
+        /// <summary>
+        /// Remove the event listeners by type
+        /// </summary>
+        /// <typeparam name="TEvent"></typeparam>
+        public void Forget<TEvent>()
+        {
+            Listeners.Remove(typeof(TEvent).FullName);
+        }
+
+        /// <summary>
+        /// Remove the event listeners by string identifier
+        /// </summary>
+        /// <param name="identifierEvent"></param>
+        /// <param name="action"></param>
+        public void Listen(string identifierEvent)
+        {
+            Listeners.Remove(identifierEvent);
         }
 
         /// <summary>
