@@ -4,7 +4,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using  NUnit.Framework;
-namespace OliWorkshop.Threading
+
+namespace OliWorkshop.Tests.Threading
 {
     public class Tests2
     {
