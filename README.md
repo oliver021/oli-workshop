@@ -37,7 +37,7 @@ manager.EnqueueAction(delegate { Console.WriteLine("action 1"); });
 // block this thread to test and that allow the queue to finish
 manager.WaitInBussy();
 ```
-
+In addition, you can at any time cancel the execution cancel the process.
 
 ```csharp
 // set the max concurrent threads
@@ -71,6 +71,8 @@ These are some examples of the use of the ** Threading.Reactive ** library which
 ```csharp
 public Task Sample()
 {
+    tring TestChannel = "test-channel";
+
     // initalize with max concurrent the 8 messages
     var broadcasting = new BroadcastConcurrent(8, 1000);
 
@@ -104,6 +106,8 @@ public Task Sample()
 ```csharp
 public Task TestCancellation()
 {
+    tring TestChannel = "test-channel";
+    
     // basic index iteration
     int i = 1;
 

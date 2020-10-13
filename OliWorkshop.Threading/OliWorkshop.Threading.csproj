@@ -9,6 +9,7 @@
     <PackageId>OliWorkshop.Threading</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Keyword>concurrency,thread,async,queue,action,parallel</Keyword>
+    <Description>Set of methods to help with concurrent process management and multi-threaded management.</Description>
   </PropertyGroup>
 
 </Project>

@@ -7,7 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OliWorkshop.Threading", "Ol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OliWorkshop.Tests.Threading", "OliWorkshop.Tests.Threading\OliWorkshop.Tests.Threading.csproj", "{FAC89452-D665-407D-B874-DDC74BEDD202}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OliWorkshop.Threading.Reactive", "OliWorkshop.Threading.Reactive\OliWorkshop.Threading.Reactive.csproj", "{E1A11AA3-ECE8-457B-9C3B-28224F6A4866}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OliWorkshop.Threading.Reactive", "OliWorkshop.Threading.Reactive\OliWorkshop.Threading.Reactive.csproj", "{E1A11AA3-ECE8-457B-9C3B-28224F6A4866}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OliWorkshop.Serializer.Blobs", "OliWorkshop.Serializer.Blobs\OliWorkshop.Serializer.Blobs.csproj", "{33054DC4-9DF3-459B-B559-5CA133038ADE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OliWorkshop.SerializerTests", "OliWorkshop.SerializerTests\OliWorkshop.SerializerTests.csproj", "{542C79A9-AA93-489F-A831-50D7B2137A13}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{945ADF40-9E9E-46AC-B824-4D8B95853535}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E94E275E-2B9C-49E9-8B5F-330F9AC6AAA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +35,24 @@ Global
 		{E1A11AA3-ECE8-457B-9C3B-28224F6A4866}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1A11AA3-ECE8-457B-9C3B-28224F6A4866}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1A11AA3-ECE8-457B-9C3B-28224F6A4866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33054DC4-9DF3-459B-B559-5CA133038ADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33054DC4-9DF3-459B-B559-5CA133038ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33054DC4-9DF3-459B-B559-5CA133038ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33054DC4-9DF3-459B-B559-5CA133038ADE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{542C79A9-AA93-489F-A831-50D7B2137A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{542C79A9-AA93-489F-A831-50D7B2137A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{542C79A9-AA93-489F-A831-50D7B2137A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{542C79A9-AA93-489F-A831-50D7B2137A13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{83753732-078A-4488-B12B-A56F59D74E21} = {945ADF40-9E9E-46AC-B824-4D8B95853535}
+		{FAC89452-D665-407D-B874-DDC74BEDD202} = {E94E275E-2B9C-49E9-8B5F-330F9AC6AAA1}
+		{E1A11AA3-ECE8-457B-9C3B-28224F6A4866} = {945ADF40-9E9E-46AC-B824-4D8B95853535}
+		{33054DC4-9DF3-459B-B559-5CA133038ADE} = {945ADF40-9E9E-46AC-B824-4D8B95853535}
+		{542C79A9-AA93-489F-A831-50D7B2137A13} = {E94E275E-2B9C-49E9-8B5F-330F9AC6AAA1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C943D9F-4F7B-4FD6-85F3-9EC0C0B159EF}
