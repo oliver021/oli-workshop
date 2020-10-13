@@ -6,6 +6,10 @@ using System.Net;
 
 namespace OliWorkshop.Serializer.Blobs
 {
+    /// <summary>
+    /// The basic delegate to represent the setter method
+    /// </summary>
+    /// <param name="value"></param>
     public delegate void SetterValue(object value);
 
     /// <summary>
@@ -31,7 +35,7 @@ namespace OliWorkshop.Serializer.Blobs
             // create a new blob array to set the result
             var blob = new ArrayTracker(1024);
 
-            /// evaluate of fields
+            // evaluate of fields
             if (options.InFields)
             {
                 foreach (var item in reflect.GetFields().Where(f => !f.IsDefined(typeof(NonSerializedAttribute))))
@@ -80,6 +84,7 @@ namespace OliWorkshop.Serializer.Blobs
             var reflect = target.GetType();
             var counter = 0;
 
+            // scan values to fields
             if (options.InFields)
             {
                 foreach (var item in reflect.GetFields().Where(f => !f.IsDefined(typeof(NonSerializedAttribute))))
@@ -88,6 +93,7 @@ namespace OliWorkshop.Serializer.Blobs
                 }
             }
 
+            // scan values to properties
             if (options.InProperties)
             {
                 foreach (var item in reflect.GetProperties().Where(f => !f.IsDefined(typeof(NonSerializedAttribute))))
@@ -109,7 +115,6 @@ namespace OliWorkshop.Serializer.Blobs
             switch (reflect.Name)
             {
                 case nameof(String):
-
                     code = data[counter];
                     
                     if (code != ByteCodes.String && code != ByteCodes.Parseable)
