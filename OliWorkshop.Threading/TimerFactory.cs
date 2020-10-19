@@ -40,6 +40,7 @@ namespace OliWorkshop.Threading
 
         /// <summary>
         /// Make time interval from a number of iteration
+        /// Note: this method ensure the interval not delay by execution
         /// </summary>
         /// <param name="execution"></param>
         /// <param name="miliseconds"></param>
@@ -56,45 +57,47 @@ namespace OliWorkshop.Threading
             var source = new TaskCompletionSource<byte>();
 
             // pooling the interval task
-            ThreadPool.QueueUserWorkItem(delegate {
+            ThreadPool.QueueUserWorkItem(delegate
+            {
 
                 // create locker manager
                 // note: the max SemaphoreSlim limit should be the number iteration for safe mode
                 var slim = new SemaphoreSlim(0, 1);
 
-                again:
-                    
+            again:
+
                 // this check should do
-                    if (iteration < 1)
+                if (iteration < 1)
+                {
+                    source.SetResult(1);
+                    try
                     {
                         source.SetResult(1);
-                        try
-                        {
-                            source.SetResult(1);
-                            slim.Dispose();
-                        }
-                         catch (Exception)
-                        {
-                            // ignore
-                        }
-                        return;
+                        slim.Dispose();
                     }
+                    catch (Exception)
+                    {
+                        // ignore
+                    }
+                    return;
+                }
 
-                    // make a interval by task
-                    Task.Delay(miliseconds).ContinueWith(prev => {
+                // make a interval by task
+                Task.Delay(miliseconds).ContinueWith(prev =>
+                {
 
-                        // free next iteration
-                        slim.Release();
+                    // free next iteration
+                    slim.Release();
 
-                        // invoke the execution action
-                        execution.Invoke();
-                    });
-                    
-                    // block for the new
-                    slim.Wait();
+                    // invoke the execution action
+                    execution.Invoke();
+                });
+
+                // block for the new
+                slim.Wait();
 
                 goto again;
-             });
+            });
 
             // return the task
             return source.Task;
@@ -120,7 +123,7 @@ namespace OliWorkshop.Threading
 
                 // check token again
                 cancellation.ThrowIfCancellationRequested();
-                
+
                 // invoke the execution action
                 execution.Invoke();
             }
@@ -148,6 +151,49 @@ namespace OliWorkshop.Threading
         public static Task MakeInterval(Action execution, TimeSpan time, CancellationToken cancellation = default)
         {
             return MakeInterval(execution, time.Milliseconds, cancellation);
+        }
+
+        /// <summary>
+        /// Make a simple timeout to execute an action
+        /// </summary>
+        /// <param name="execution"></param>
+        public static void Timeout(Action execution, int miliseconds, CancellationToken cancellation = default)
+        {
+            // the action should not be null
+            if (execution is null)
+            {
+                throw new ArgumentNullException(nameof(execution));
+            }
+
+            // validate time argument
+            if (miliseconds < 1)
+            {
+                throw new InvalidOperationException("the miliseconds value is not valid, should be > 0");
+            }
+
+            // the cancellation token should not be requested ot throw an exception to inform
+            cancellation.ThrowIfCancellationRequested();
+
+            // enqueue execution action
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                Thread.Sleep(miliseconds);
+                if (!cancellation.IsCancellationRequested)
+                {
+                    execution.Invoke();
+                }
+            });
+        }
+
+        /// <summary>
+        /// Make a simple timeout to execute an action by Timespan instance
+        /// </summary>
+        /// <param name="execution"></param>
+        /// <param name="time"></param>
+        /// <param name="cancellation"></param>
+        public static void Timeout(Action execution, TimeSpan time, CancellationToken cancellation = default)
+        {
+            Timeout(execution, time, cancellation);
         }
     }
 }

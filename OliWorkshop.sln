@@ -9,13 +9,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OliWorkshop.Tests.Threading
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OliWorkshop.Threading.Reactive", "OliWorkshop.Threading.Reactive\OliWorkshop.Threading.Reactive.csproj", "{E1A11AA3-ECE8-457B-9C3B-28224F6A4866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OliWorkshop.Serializer.Blobs", "OliWorkshop.Serializer.Blobs\OliWorkshop.Serializer.Blobs.csproj", "{33054DC4-9DF3-459B-B559-5CA133038ADE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OliWorkshop.Serializer.Blobs", "OliWorkshop.Serializer.Blobs\OliWorkshop.Serializer.Blobs.csproj", "{33054DC4-9DF3-459B-B559-5CA133038ADE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OliWorkshop.SerializerTests", "OliWorkshop.SerializerTests\OliWorkshop.SerializerTests.csproj", "{542C79A9-AA93-489F-A831-50D7B2137A13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OliWorkshop.SerializerTests", "OliWorkshop.SerializerTests\OliWorkshop.SerializerTests.csproj", "{542C79A9-AA93-489F-A831-50D7B2137A13}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{945ADF40-9E9E-46AC-B824-4D8B95853535}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E94E275E-2B9C-49E9-8B5F-330F9AC6AAA1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OliWorkshop.Blobs", "OliWorkshop.Blobs\OliWorkshop.Blobs.csproj", "{EED2CAA7-1C88-462B-B33C-105886989895}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OliWorkshop.Threading.Signals", "OliWorkshop.Threading.Signals\OliWorkshop.Threading.Signals.csproj", "{C3F25BA5-FAE1-4410-A057-F173D2E19D44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OliWorkshop.Text", "OliWorkshop\OliWorkshop.Text.csproj", "{E8F6AFBE-128E-4E24-80C7-248EBE29F294}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OliWorkshop.Linq.Reflection", "OliWorkshop.Linq.Reflection\OliWorkshop.Linq.Reflection.csproj", "{E2561D92-7F4E-49FE-BB11-A81C0CF11B5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +51,22 @@ Global
 		{542C79A9-AA93-489F-A831-50D7B2137A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{542C79A9-AA93-489F-A831-50D7B2137A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{542C79A9-AA93-489F-A831-50D7B2137A13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EED2CAA7-1C88-462B-B33C-105886989895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EED2CAA7-1C88-462B-B33C-105886989895}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EED2CAA7-1C88-462B-B33C-105886989895}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EED2CAA7-1C88-462B-B33C-105886989895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3F25BA5-FAE1-4410-A057-F173D2E19D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3F25BA5-FAE1-4410-A057-F173D2E19D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3F25BA5-FAE1-4410-A057-F173D2E19D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3F25BA5-FAE1-4410-A057-F173D2E19D44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8F6AFBE-128E-4E24-80C7-248EBE29F294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8F6AFBE-128E-4E24-80C7-248EBE29F294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8F6AFBE-128E-4E24-80C7-248EBE29F294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8F6AFBE-128E-4E24-80C7-248EBE29F294}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2561D92-7F4E-49FE-BB11-A81C0CF11B5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2561D92-7F4E-49FE-BB11-A81C0CF11B5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2561D92-7F4E-49FE-BB11-A81C0CF11B5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2561D92-7F4E-49FE-BB11-A81C0CF11B5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +77,10 @@ Global
 		{E1A11AA3-ECE8-457B-9C3B-28224F6A4866} = {945ADF40-9E9E-46AC-B824-4D8B95853535}
 		{33054DC4-9DF3-459B-B559-5CA133038ADE} = {945ADF40-9E9E-46AC-B824-4D8B95853535}
 		{542C79A9-AA93-489F-A831-50D7B2137A13} = {E94E275E-2B9C-49E9-8B5F-330F9AC6AAA1}
+		{EED2CAA7-1C88-462B-B33C-105886989895} = {945ADF40-9E9E-46AC-B824-4D8B95853535}
+		{C3F25BA5-FAE1-4410-A057-F173D2E19D44} = {945ADF40-9E9E-46AC-B824-4D8B95853535}
+		{E8F6AFBE-128E-4E24-80C7-248EBE29F294} = {945ADF40-9E9E-46AC-B824-4D8B95853535}
+		{E2561D92-7F4E-49FE-BB11-A81C0CF11B5E} = {945ADF40-9E9E-46AC-B824-4D8B95853535}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C943D9F-4F7B-4FD6-85F3-9EC0C0B159EF}

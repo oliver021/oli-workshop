@@ -14,6 +14,9 @@ namespace OliWorkshop.Serializer.Blobs
 
     /// <summary>
     /// Main class that contains the basic method to converto from object to blob bytes 
+    /// and the invert action
+    /// Use <see cref="SerializeObject(object, SerializerOptions)"/> to convert a object to binary blob
+    /// and <see cref="DeserializeObject{T}(byte[], SerializerOptions)"/> to invert process
     /// </summary>
     public static class BlobConvert
     {
@@ -25,20 +28,22 @@ namespace OliWorkshop.Serializer.Blobs
         /// <returns></returns>
         public static byte[] SerializeObject(object data, SerializerOptions options)
         {
+            // the options should be set
             if (options is null)
             {
                 throw new ArgumentNullException(nameof(options));
             }
 
+            // get the reflection object
             var reflect = data.GetType();
 
-            // create a new blob array to set the result
+            // create a new blob tracker array to set the result
             var blob = new ArrayTracker(1024);
 
             // evaluate of fields
             if (options.InFields)
             {
-                foreach (var item in reflect.GetFields().Where(f => !f.IsDefined(typeof(NonSerializedAttribute))))
+                foreach ( var item in reflect.GetFields().Where(f => !f.IsDefined(typeof(NonSerializedAttribute))) )
                 {
                     WriteBuffer(item.GetValue(data), item.FieldType, blob, options);
                 }
@@ -47,7 +52,7 @@ namespace OliWorkshop.Serializer.Blobs
             // evaluate the properties
             if (options.InProperties)
             {
-                foreach (var item in reflect.GetProperties().Where(f => !f.IsDefined(typeof(NonSerializedAttribute))))
+                foreach ( var item in reflect.GetProperties().Where(f => !f.IsDefined(typeof(NonSerializedAttribute))) )
                 {
                     WriteBuffer(item.GetValue(data), item.PropertyType, blob, options);
                 }
@@ -81,6 +86,7 @@ namespace OliWorkshop.Serializer.Blobs
         /// <returns></returns>
         public static void Populate(object target, byte[] data, SerializerOptions options)
         {
+            // basic initializations
             var reflect = target.GetType();
             var counter = 0;
 
@@ -111,7 +117,10 @@ namespace OliWorkshop.Serializer.Blobs
         /// <param name="counter"></param>
         private static void ReadFromBlob(Type reflect, SetterValue setter, byte[] data, ref int counter)
         {
+            // byte code specification
             byte code = 0;
+
+            // switch iteration control about different type value
             switch (reflect.Name)
             {
                 case nameof(String):
@@ -189,6 +198,8 @@ namespace OliWorkshop.Serializer.Blobs
                     blob.WriteBuffer(ByteCodes.String, BitConverter.GetBytes(length), strArrBytes);
                     break;
 
+                 //// The numeric types representation for many aspects
+                 /// like the byte length, if is unsigned and if is float, double or integer type
                 case bool current:
                     byte boolVal = (byte) (current ? 1 : 0);
                     blob.WriteBuffer(ByteCodes.Boolean, new byte[1] {boolVal});
@@ -227,7 +238,6 @@ namespace OliWorkshop.Serializer.Blobs
                     break;
 
                 default:
-                    // to parseable types
                     if (value is null) {
                         /// write the byte null
                         blob.WriteOnce(ByteCodes.Null);
@@ -240,9 +250,23 @@ namespace OliWorkshop.Serializer.Blobs
                             value is Version
                             )
                     {
+                        // working with parseable values
                         var strArrBytes2 = Encoding.UTF8.GetBytes(value.ToString());
                         byte length2 = (byte)strArrBytes2.Length;
+
+                        // store the parseable data
                         blob.WriteBuffer(ByteCodes.Parseable, new[] { length2 }, strArrBytes2);
+                    }
+                    else if (meta.IsInterface)
+                    {
+                        
+                    }
+                    else if(meta.IsEnum)
+                    {
+                        
+                    }else if (meta.IsArray) 
+                    { 
+
                     } else if (meta.IsClass)
                     {
                         // recursive sys
