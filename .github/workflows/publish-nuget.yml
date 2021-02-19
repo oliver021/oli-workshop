@@ -30,7 +30,7 @@ jobs:
     - name: Publish to NuGet Reactive
       uses: brandedoutcast/publish-nuget@v2
       with:
-        PROJECT_FILE_PATH: OliWorkshop.Threading.Reactive/ OliWorkshop.Threading.Reactive.csproj
+        PROJECT_FILE_PATH: OliWorkshop.Threading.Reactive/OliWorkshop.Threading.Reactive.csproj
         VERSION_REGEX: '^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$'
         TAG_FORMAT: '*'
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
