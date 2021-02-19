@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.0.16</Version>
+    <Version>1.2.16</Version>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/oliver021/oli-workshop</RepositoryUrl>
     <Authors>Oliver Valiente</Authors>

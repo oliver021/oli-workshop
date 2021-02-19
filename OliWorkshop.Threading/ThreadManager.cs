@@ -303,9 +303,6 @@ namespace OliWorkshop.Threading
         {
             // execution loop
             ExecuterLoopWithoutRate();
-
-            // abort theader
-            Thread.CurrentThread.Abort();
         }
 
         /// <summary>
@@ -316,9 +313,6 @@ namespace OliWorkshop.Threading
         {
             // execution loop
             ExecuterLoopWithRate();
-
-            // abort theader
-            Thread.CurrentThread.Abort();
         }
 
         /// <summary>

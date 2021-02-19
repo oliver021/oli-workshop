@@ -4,6 +4,10 @@ using System.Text;
 
 namespace OliWorkshop.Serializer.Blobs
 {
+    /// <summary>
+    /// The array tracker allow count the record of index
+    /// to check the buffer storage
+    /// </summary>
     public class ArrayTracker
     {
         public byte[] buffer;
@@ -12,6 +16,10 @@ namespace OliWorkshop.Serializer.Blobs
 
         public int record;
 
+        /// <summary>
+        /// Requiere a rate resize
+        /// </summary>
+        /// <param name="rate"></param>
         public ArrayTracker(int rate)
         {
             Rate = rate;
@@ -20,9 +28,15 @@ namespace OliWorkshop.Serializer.Blobs
             record = 0;
         }
 
+        /// <summary>
+        /// The main Rate to resize the buffer when this need more memory usage
+        /// </summary>
         public int Rate { get; }
 
-
+        /// <summary>
+        /// Write a simple byte
+        /// </summary>
+        /// <param name="code"></param>
         public void WriteOnce(byte code) {
             if (capacity < (1 + record))
             {
@@ -35,6 +49,11 @@ namespace OliWorkshop.Serializer.Blobs
 
         }
 
+        /// <summary>
+        /// Bytes array to append at end the buffer
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="pack"></param>
         public void WriteBuffer(byte code, byte[] pack)
         {
             var nextWrite = 1 + pack.Length;
@@ -51,6 +70,13 @@ namespace OliWorkshop.Serializer.Blobs
             record += pack.Length;
         }
 
+        /// <summary>
+        /// Bytes array to append at end the buffer with bytes prefix
+        /// like length info or subtypes specifications
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="prefix"></param>
+        /// <param name="pack"></param>
         public void WriteBuffer(byte code, byte[] prefix, byte[] pack)
         {
             var nextWrite = 1 + pack.Length + prefix.Length;
