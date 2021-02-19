@@ -262,7 +262,7 @@ namespace OliWorkshop.Threading
         public Task WaitInBussyAsync(CancellationToken cancellation = default)
         {
             // create a task completion source
-            var source = new TaskCompletionSource<byte>();
+            var source = new TaskCompletionSource<bool>();
             
             // enqueue by pooling this task
             WhenFinish(delegate {
@@ -270,10 +270,13 @@ namespace OliWorkshop.Threading
                     // is possible also stop this task by cancellation token by argument
                     if (cancellation.IsCancellationRequested || Cancellation.Token.IsCancellationRequested || StatusWork < 1)
                     {
-                        source.SetResult(1);
+                        source.SetResult(true);
                     }
                     Thread.Sleep(40);
-                goto check;
+                    if (!source.Task.IsCompleted)
+                    {
+                        goto check;
+                    }
             });
 
             return source.Task;
@@ -302,7 +305,14 @@ namespace OliWorkshop.Threading
         private void ThreadRunner(object _)
         {
             // execution loop
-            ExecuterLoopWithoutRate();
+            try
+            {
+                ExecuterLoopWithoutRate();
+            }
+            catch (OperationCanceledException)
+            {
+                // ignore
+            }
         }
 
         /// <summary>
