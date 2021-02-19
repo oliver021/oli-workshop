@@ -17,11 +17,11 @@ namespace OliWorkshop.Threading.Signals
         /// </summary>
         Thread ExecutionThread = null;
 
-        ConcurrentQueue<Signal> Penddings = new ConcurrentQueue<Signal>();
+        ConcurrentQueue<SignalPropagation> Penddings = new ConcurrentQueue<SignalPropagation>();
 
         Semaphore Semaphore = new Semaphore(0, 1);
 
-        protected Process(ThreadPriority priority = ThreadPriority.Normal, CancellationToken cancellation = default)
+        protected Process(CancellationToken cancellation = default, ThreadPriority priority = ThreadPriority.Normal)
         {
             ExecutionThread = new Thread(ExecutionHandle);
             ExecutionThread.Priority = priority;
@@ -33,11 +33,11 @@ namespace OliWorkshop.Threading.Signals
         /// <summary>
         /// Execution handle is method to run a internal execution
         /// </summary>
-        private void ExecutionHandle()
+        internal void ExecutionHandle()
         {
             while (!Cancellation.IsCancellationRequested)
             {
-                if (Penddings.TryDequeue(out Signal signal))
+                if (Penddings.TryDequeue(out SignalPropagation signal))
                 {
 
                 }
